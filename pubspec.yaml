@@ -1,10 +1,11 @@
 name: dancer
-author: Hiroshi Yamamoto
-version: 0.3.2
+author: Hiroshi Yamamoto <higon@freepress.jp>
+version: 0.4.0+1
 homepage: http://github.com/hyamamoto/dancer.dart
-description: High-level audio API, designed to make sweet visualizations.
+description: High level audio API with a Flash fallback, designed to make sweet visualizations.
+documentation: http://htmlpreview.github.io/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html
 environment:
   sdk: '>1.1.0'
 dependencies:
-  browser: any
-  js: any
+  browser: '>=0.8.7 <0.10.0'
+  js: '>=0.2.2 <0.3.0'

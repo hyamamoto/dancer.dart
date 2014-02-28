@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import 'package:dancer/dancer.dart';
-import 'package:js/js_wrapping.dart' as jsw;
 
 void main() {
   
@@ -17,6 +16,7 @@ void main() {
     ..offKick = null
   ).on();
 
+  // Schedule time based functions.
   dancer.onceAt( 1, () {
     print("Scheduled Func: 1 sec");
   }).between( 1.5, 2.0, () {
@@ -30,16 +30,18 @@ void main() {
     //kick.off();
   });
 
-//  AudioElement audioSource = querySelector("#audio");
-//  dancer.loadFromAudio(audioSource);
+  // You can also use <audio> tag on a host page to load an audio file
+  // AudioElement audioSource = querySelector("#audio");
+  // dancer.loadFromAudio(audioSource);
 
+  // Load an audio file.
   const String AUDIO_FILE = '../songs/tonetest';
-  // const String AUDIO_FILE = '../songs/dubstep_bass';
   // const String AUDIO_FILE = '../songs/deux_hirondelles';
   dancer.load({ "src": AUDIO_FILE, "codecs": [ 'ogg', 'mp3']});
 
+  // Setup "Play/Pause" button.
   querySelector("#sample_text_id")
-    ..text = "Start/Pause"
+    ..text = "Play/Pause"
     ..onClick.listen( (MouseEvent e) {
       
       if (dancer.isPlaying()) {        
@@ -51,7 +53,8 @@ void main() {
         kick.on();
         dancer.play();
       }
-      
+
+      // Print debuggy messages on console.
       print('\tisPlaying: ' + dancer.isPlaying().toString());
       print('\tisLoaded: ' + dancer.isLoaded().toString());
       var spectrum = dancer.getSpectrum();

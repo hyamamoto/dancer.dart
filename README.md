@@ -1,6 +1,6 @@
 # [dancer.dart](http://github.com/hyamamoto/dancer.dart)
 
-A Dart package "dancer" is a minimalist's high level audio library for HTML5 with a Flash fallback. It is implemented as a wrapper for [dancer.js](https://github.com/jsantell/dancer.js) .
+A Dart package "dancer" is a high level audio library for HTML5 with a Flash fallback. It is implemented as a [dancer.js](https://github.com/jsantell/dancer.js) wrapper.
 
 _version 0.4.0 (2/28/2014)_
 
@@ -23,12 +23,12 @@ Live Examples
 * [Waveform](http://freepress.jp/dev/dancer.dart/examples/waveform/waveform.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/waveform/))  
     Waveform analysis.
 * [Song Demo](http://freepress.jp/dev/dancer.dart/examples/song_demo/song_demo.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/song_demo/))  
-    Beat detection linked with 3D visual effects by three.js .
+    Kick detection linked with 3D visual effects by three.js .
 
 API Document
 ---
 
-* [DartDoc](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html)
+* [dartdoc/dancer](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html)
 
 Code Example
 ---
@@ -37,7 +37,7 @@ Code Example
 
   final Dancer dancer = new Dancer();
 
-  // Setup some kick.
+  // Setup a kick detection.
   int kickCount = 0;
   final Kick kick = dancer.createKick(new KickOptions()
     ..decay = 0.02
@@ -46,7 +46,7 @@ Code Example
     ..offKick = null
   ).on();
 
-  // Schedule some event.
+  // Schedule time based functions.
   dancer.onceAt( 1, () {
     print("Scheduled Func: 1 sec");
   }).between( 1.5, 2.0, () {
@@ -60,7 +60,7 @@ Code Example
     //kick.off();
   });
 
-  // Load up audio file.
+  // Load up an audio file.
   dancer.load({ "src": "../songs/tonetest", "codecs": [ "ogg", "mp3"]});
 
   ...
@@ -71,11 +71,10 @@ Code Example
   dancer.play();
 ```
 
-
 Dependencies
 ---
 
-* [dancer.js](https://github.com/jsantell/dancer.js/) - a backend javascript implementation.
+* [dancer.js](https://github.com/jsantell/dancer.js/) - a backend javascript implementation (included inside a 'packages/dancer' directory).
 
 Change Logs
 ----
@@ -84,5 +83,9 @@ Change Logs
 * Complete wrapper of dancer.js v0.4.0.
     
 ** 0.0.1 (2/27/2014)**  
-* Prottype based on dancer.js 0.0.1
+* Prottype based on dancer.js v0.0.1
 
+License
+----
+
+dancer.dart is released under the [the MIT license](LICENSE) by Hiroshi Yamamoto <higon@freepress.jp>

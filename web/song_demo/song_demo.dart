@@ -5,6 +5,24 @@ import 'package:js/js.dart' as js;
 
 import 'package:dancer/dancer.dart';
 
+const String AUDIO_FILE = '../songs/deux_hirondelles';
+final List<String> AUDIO_CODECS = [ 'ogg', 'mp3' ];
+
+const
+  PARTICLE_COUNT    = 128,
+  MAX_PARTICLE_SIZE = 12,
+  MIN_PARTICLE_SIZE = 2,
+  GROWTH_RATE       = 5,
+  DECAY_RATE        = 0.5,
+  BEAM_RATE         = 0.5,
+  BEAM_COUNT        = 12;
+
+final
+  GROWTH_VECTOR = new js.Proxy(Vector3, GROWTH_RATE, GROWTH_RATE, GROWTH_RATE ),
+  DECAY_VECTOR  = new js.Proxy(Vector3, DECAY_RATE, DECAY_RATE, DECAY_RATE ),
+  beamGroup     = new js.Proxy(Object3D),
+  colors        = [ 0xaaee22, 0x04dbe5, 0xff0077, 0xffb412, 0xf6c83d ];
+
 // three.js proxies
 final js.Proxy THREE = js.context.THREE;
 final js.Proxy Scene = js.context.THREE.Object3D;
@@ -26,16 +44,14 @@ void loaded (Dancer dancer) {
     supported = Dancer.isSupported(),
     hasSupported = supported != null && supported.isNotEmpty;
 
-  anchor.append( document.createElement( 'span')
-      ..text = hasSupported ? 'Play!' : 'Close' );
+  anchor.text = hasSupported ? 'Play!' : 'Close';
   anchor.setAttribute( 'href', '#' );
   loading.innerHtml = '';
   loading.append( anchor );
 
   if ( !hasSupported ) {
-    var p = document.createElement('P');
-    p.append( document.createElement( 'span')
-      ..text='Your browser does not currently support either Web Audio API or Audio Data API. The audio may play, but the visualizers will not move to the music; check out the latest Chrome or Firefox browsers!' );
+    var p = document.createElement('P')
+      ..text = 'Your browser does not currently support either Web Audio API or Audio Data API. The audio may play, but the visualizers will not move to the music; check out the latest Chrome or Firefox browsers!';
     loading.append( p );
   }
 
@@ -43,40 +59,23 @@ void loaded (Dancer dancer) {
     dancer.play();
     document.getElementById('loading').style.display = 'none';
   });
-  
 }
-
-//final String AUDIO_FILE = '../songs/dubstep_bass';
-// const String AUDIO_FILE = '../songs/tonetest';
-const String AUDIO_FILE = '../songs/deux_hirondelles';
-final List<String> AUDIO_CODECS = [ 'ogg', 'mp3' ];
-
-const
-  PARTICLE_COUNT    = 128,
-  MAX_PARTICLE_SIZE = 12,
-  MIN_PARTICLE_SIZE = 2,
-  GROWTH_RATE       = 5,
-  DECAY_RATE        = 0.5,
-
-  BEAM_RATE         = 0.5,
-  BEAM_COUNT        = 12;
-
-final
-  GROWTH_VECTOR = new js.Proxy(Vector3, GROWTH_RATE, GROWTH_RATE, GROWTH_RATE ),
-  DECAY_VECTOR  = new js.Proxy(Vector3, DECAY_RATE, DECAY_RATE, DECAY_RATE ),
-  beamGroup     = new js.Proxy(Object3D),
-  colors        = [ 0xaaee22, 0x04dbe5, 0xff0077, 0xffb412, 0xf6c83d ];
 
 void main() {
 
+    // Flash audio fallback support
     Dancer.setOptions({
       'flashSWF' : 'packages/dancer/src/js/soundmanager2.swf',
       'flashJS ' : 'packages/dancer/src/js/soundmanager2.js'
     });
 
+    // Initialize three.js scene
     initScene();
 
+    // Create a Dancer instance.
     final Dancer dancer = new Dancer();
+
+    // Add a Kick for the star tinkering.
     final Kick kick = dancer.createKick( new KickOptions()
         ..onKick = (num mag) {
           final particles = group.children;
@@ -96,6 +95,7 @@ void main() {
         }
         ..offKick = decay );
     
+    // Schedule time events then load an audio file.
     dancer.onceAt( 0.0, () {
       kick.on();
     }).onceAt( 8.2, () {
@@ -130,8 +130,6 @@ void main() {
     
     on();
 }
-
-
 
 void on () {
   final math.Random random = new math.Random();
@@ -208,7 +206,7 @@ js.Proxy newParticleMat( [String color] ) {
   }));
 }
 
-// Expose these for the demo
+// Exproted variables for main() from initScene()
 var rotateSpeed = 1;
 var scene = new js.Proxy(Scene);
 var group = new js.Proxy(Object3D);
