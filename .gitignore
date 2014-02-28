@@ -2,23 +2,22 @@
 .DS_Store?
 ._*
 Thumbs.db
-
-packages
-lib/packages
+dart-sdk
+dartium
 
 tmp/
-build/
+
+packages
 
 web/packages
-web/dancer.dart.js
-web/dancer.dart.js.deps
-web/dancer.dart.js.map
-web/dancer.dart.precompiled.js
+web/**/packages
 web/.DS_Store
-
+lib/packages
+lib/.DS_Store
 test/packages
-test/dancer.dart.js
-test/dancer.dart.js.deps
-test/dancer.dart.js.map
-test/dancer.dart.precompiled.js
 test/.DS_Store
+
+**/*.dart.js
+**/*.dart.js.deps
+**/*.dart.js.map
+**/*.dart.precompiled.js

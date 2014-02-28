@@ -1,0 +1,279 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Kick class / dancer Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="dancer" data-type="Kick">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../dancer.html">dancer</a> &rsaquo; <a href="../dancer/Kick.html">Kick</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Kick</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class Kick implements js.Serializable&lt;js.Proxy&gt; {
+
+ final js.Proxy _proxy;
+ js.Proxy toJs() =&gt; _proxy;
+ 
+ Kick( Dancer dancer, [KickOptions options]) : this._( options == null ? 
+           new js.Proxy(js.context.Dancer.Kick, dancer.toJs()):
+             new js.Proxy(js.context.Dancer.Kick, dancer.toJs(), options.toJs()));
+ Kick._(this._proxy);
+ 
+ Dancer get dancer =&gt; _proxy.dancer;
+ Float32List get frequency =&gt; jsw.JsObjectToArrayList.cast(_proxy.frequency); // default [0, 10]
+ double get threshold =&gt; _proxy.threshold; // default 0.3
+ double get decay =&gt; _proxy.decay; // default 0.02
+ KickOnOffCallback get onKick =&gt; _proxy.onKick;
+ KickOnOffCallback get offKick =&gt; _proxy.offKick;
+ bool get isOn =&gt; _proxy.isOn; // default false
+ double get currentThreshold =&gt; _proxy.currentThreshold;
+
+ /// Turns on the kick instance's callbacks and detections
+ Kick on() {
+   _proxy.on();
+   return this;
+ }
+ 
+ /// Turns off the kick instance's callbacks and detections
+ Kick off() {
+   _proxy.off();
+   return this;
+ }
+
+ /// Can pass in an object literal with the 5 kick options, similar to creating a new kick option
+ void set( KickOptions options) =&gt; _proxy.set( options.toJs());
+
+ void onUpdate() =&gt; _proxy.onUpdate();
+
+ num maxAmplitude(List&lt;double&gt; fft, List&lt;double&gt; frequency) =&gt; _proxy.maxAmplitude(fft, frequency);
+}
+</pre>
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span>Serializable&lt;Proxy&gt;</span></p>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>Kick</strong>(<a href="../dancer/Dancer.html">Dancer</a> dancer, [<a href="../dancer/KickOptions.html">KickOptions</a> options]) <a class="anchor-link" href="#"
+              title="Permalink to Kick.Kick">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Creates a new <code>Object</code> instance.</p>
+<p><code>Object</code> instances have no meaningful state, and are only useful
+through their identity. An <code>Object</code> instance is equal to itself
+only.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+Kick( Dancer dancer, [KickOptions options]) : this._( options == null ? 
+         new js.Proxy(js.context.Dancer.Kick, dancer.toJs()):
+           new js.Proxy(js.context.Dancer.Kick, dancer.toJs(), options.toJs()));
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="currentThreshold">
+<button class="show-code">Code</button>
+final double         <strong>currentThreshold</strong> <a class="anchor-link"
+            href="#currentThreshold"
+            title="Permalink to Kick.currentThreshold">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get currentThreshold =&gt; _proxy.currentThreshold;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dancer">
+<button class="show-code">Code</button>
+final <a href="../dancer/Dancer.html">Dancer</a>         <strong>dancer</strong> <a class="anchor-link"
+            href="#dancer"
+            title="Permalink to Kick.dancer">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Dancer get dancer =&gt; _proxy.dancer;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="decay">
+<button class="show-code">Code</button>
+final double         <strong>decay</strong> <a class="anchor-link"
+            href="#decay"
+            title="Permalink to Kick.decay">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get decay =&gt; _proxy.decay;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="frequency">
+<button class="show-code">Code</button>
+final Float32List         <strong>frequency</strong> <a class="anchor-link"
+            href="#frequency"
+            title="Permalink to Kick.frequency">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Float32List get frequency =&gt; jsw.JsObjectToArrayList.cast(_proxy.frequency);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="isOn">
+<button class="show-code">Code</button>
+final bool         <strong>isOn</strong> <a class="anchor-link"
+            href="#isOn"
+            title="Permalink to Kick.isOn">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+bool get isOn =&gt; _proxy.isOn;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="offKick">
+<button class="show-code">Code</button>
+final <a href="../dancer/KickOnOffCallback.html">KickOnOffCallback</a>         <strong>offKick</strong> <a class="anchor-link"
+            href="#offKick"
+            title="Permalink to Kick.offKick">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+KickOnOffCallback get offKick =&gt; _proxy.offKick;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onKick">
+<button class="show-code">Code</button>
+final <a href="../dancer/KickOnOffCallback.html">KickOnOffCallback</a>         <strong>onKick</strong> <a class="anchor-link"
+            href="#onKick"
+            title="Permalink to Kick.onKick">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+KickOnOffCallback get onKick =&gt; _proxy.onKick;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="threshold">
+<button class="show-code">Code</button>
+final double         <strong>threshold</strong> <a class="anchor-link"
+            href="#threshold"
+            title="Permalink to Kick.threshold">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get threshold =&gt; _proxy.threshold;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="maxAmplitude">
+<button class="show-code">Code</button>
+num <strong>maxAmplitude</strong>(List&lt;double&gt; fft, List&lt;double&gt; frequency) <a class="anchor-link" href="#maxAmplitude"
+              title="Permalink to Kick.maxAmplitude">#</a></h4>
+<div class="doc">
+<pre class="source">
+num maxAmplitude(List&lt;double&gt; fft, List&lt;double&gt; frequency) =&gt; _proxy.maxAmplitude(fft, frequency);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="off">
+<button class="show-code">Code</button>
+<a href="../dancer/Kick.html">Kick</a> <strong>off</strong>() <a class="anchor-link" href="#off"
+              title="Permalink to Kick.off">#</a></h4>
+<div class="doc">
+<p>Turns off the kick instance's callbacks and detections</p>
+<pre class="source">
+Kick off() {
+ _proxy.off();
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="on">
+<button class="show-code">Code</button>
+<a href="../dancer/Kick.html">Kick</a> <strong>on</strong>() <a class="anchor-link" href="#on"
+              title="Permalink to Kick.on">#</a></h4>
+<div class="doc">
+<p>Turns on the kick instance's callbacks and detections</p>
+<pre class="source">
+Kick on() {
+ _proxy.on();
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="onUpdate">
+<button class="show-code">Code</button>
+void <strong>onUpdate</strong>() <a class="anchor-link" href="#onUpdate"
+              title="Permalink to Kick.onUpdate">#</a></h4>
+<div class="doc">
+<pre class="source">
+void onUpdate() =&gt; _proxy.onUpdate();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="set">
+<button class="show-code">Code</button>
+void <strong>set</strong>(<a href="../dancer/KickOptions.html">KickOptions</a> options) <a class="anchor-link" href="#set"
+              title="Permalink to Kick.set">#</a></h4>
+<div class="doc">
+<p>Can pass in an object literal with the 5 kick options, similar to creating a new kick option</p>
+<pre class="source">
+void set( KickOptions options) =&gt; _proxy.set( options.toJs());
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="toJs">
+<button class="show-code">Code</button>
+Proxy <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to Kick.toJs">#</a></h4>
+<div class="doc">
+<pre class="source">
+js.Proxy toJs() =&gt; _proxy;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2014-02-28 03:43:23.627</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

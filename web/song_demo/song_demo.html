@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dancer.dart</title>
+    <link rel="stylesheet" href="../dancer.css">
+  </head>
+  <body>
+    <h1>dancer.dart</h1>
+
+    <div id="info">
+      <h1>dancer.dart</h1>
+      <h2>Audio Library</h2>
+      <h3>Song Demo</h3>
+      <ul>
+        <li><a href="https://github.com/hyamamoto/dancer.dart" title="on GitHub">view Source</a></li>
+        <li>by Hiroshi Yamamoto</li>
+      </ul>
+    </div>
+
+    <div id="loading">Loading . . .</div>
+    <!-- <canvas id="fft" height="50" width="256"></canvas> -->
+
+    <!-- three.js -->
+    <script type="text/javascript" src="js/Three.js"></script>
+    <script type="text/javascript" src="js/Stats.js"></script>
+    <script type="text/javascript" src="js/Detector.js"></script>
+    
+    <!-- dancer.dart dependencies -->
+    <script type="text/javascript" src="packages/dancer/src/js/dancer.js"></script>   
+    <script type="text/javascript" src="packages/dancer/src/js/dancer.fft.js"></script>   
+    <script type="text/javascript" src="packages/dancer/src/js/fft.js"></script>
+    <script type="text/javascript" src="packages/dancer/src/js/flash_detect.js"></script>
+    
+    <!-- song_demo -->
+    <script type="application/dart" src="song_demo.dart"></script>
+    <script type="text/javascript" src="packages/browser/dart.js"></script>
+    <script type="text/javascript" src="packages/browser/interop.js"></script>
+    
+  </body>
+</html>

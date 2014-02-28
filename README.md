@@ -1,45 +1,76 @@
-dancer.dart
-======
+# [dancer.dart](http://github.com/hyamamoto/dancer.dart)
 
-* this library is not released *
+A Dart package "dancer" is a minimalist's high level audio library for HTML5 with a Flash fallback. It is implemented as a wrapper for [dancer.js](https://github.com/jsantell/dancer.js) .
 
-http://github.com/hyamamoto/dancer.dart
+_version 0.4.0 (2/28/2014)_
 
-Example
+Features
+---
+* Use real-time audio waveform and frequency data and map it to any arbitrary visualization
+* Use Dancer to get audio data from any preexisting audio source
+* Leverage kick detection into your visualizations
+* Simple API to time callbacks and events to any section of a song
+* Supports Web Audio (webkit/mozilla), Audio Data (mozilla) and flash fallback (v9+)
+* Extensible framework supporting plugins and custom behaviours
+
+Live Examples
+---
+
+* [Simple Player](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/play_stop/play_stop.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/play_stop/))  
+    Simple audio player with Play/Stop button.
+* [FFT](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/fft/fft.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/fft/))  
+    Realtime 'Fast Fourier Transform' visualizer.
+* [Waveform](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/waveform/waveform.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/waveform/))  
+    Waveform analysis.
+* [Song Demo](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/song_demo/song_demo.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/song_demo/))  
+    Beat detection linked with 3D visual effects by three.js .
+
+API Document
+---
+
+* [DartDoc](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html)
+
+Code Example
 ---
 
 ```dart
 
-  Dancer dancer = new Dancer("./zircon_devils_spirit.ogg");
+  final Dancer dancer = new Dancer();
 
-  BeatOptions beatOptions = new BeatOptions()
-    ..onBeat = (dancer, mag) => print( 'Beat!')
-    ..offBeat = (dancer, mag) => print( 'no beat.');
-  Beat beat = new Beat(dancer, beatOptions);
+  // Setup some kick.
+  int kickCount = 0;
+  final Kick kick = dancer.createKick(new KickOptions()
+    ..decay = 0.02
+    ..threshold = 0.3
+    ..onKick = (num mag) { print( 'Kick[$kickCount]: mag = $mag'); kickCount++; }
+    ..offKick = null
+  ).on();
 
-  dancer.onceAt( 10, (dancer) {
-    print("10 sec");
-  }).between( 10, 60, ( dancer) {
-    print("10 sec - 60 sec: frame");
-  }).after( 60, ( dancer) {
-    print("60 sec: " + dancer.getFrequency( 400 ));
-  }).onceAt( 120, (dancer) {
-    print("120 sec");
-    beat.off();
+  // Schedule some event.
+  dancer.onceAt( 1, () {
+    print("Scheduled Func: 1 sec");
+  }).between( 1.5, 2.0, () {
+    print("Scheduled Func: 1.5 sec - 2.0 sec");
+  }).onceAt( 2.5, (){
+    final num freq = dancer.getFrequency( 400);
+    print("Scheduled Func: 2.5 sec: $freq");
+  }).after( 4, () {
+    final num time = dancer.getTime();
+    print("Scheduled Func: 4 sec +: $time");
+    //kick.off();
   });
 
-  DancerAdapter adapter =  dancer.audioAdapter;
-  if (adapter.isPlaying) {        
-    adapter.stop();
-  } else {
-    adapter.play();
-  }
+  // Load up audio file.
+  dancer.load({ "src": "../songs/tonetest", "codecs": [ "ogg", "mp3"]});
+
+  ...
+  ...
+  ...
+
+  // Start playing  
+  dancer.play();
 ```
 
-Requirements
-----
-
-**HTML5 Playback with Web Audio or Audio Data** Chrome and Firefox are both supported out of the box
 
 Dependencies
 ---
@@ -48,6 +79,10 @@ Dependencies
 
 Change Logs
 ----
-**v0.0.1 (2/27/2014)**
-* Implementation based on dancer.js version 0.0.1
+
+** 0.4.0 (2/28/2014)**  
+* Complete wrapper of dancer.js v0.4.0.
+    
+** 0.0.1 (2/27/2014)**  
+* Prottype based on dancer.js 0.0.1
 

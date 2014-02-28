@@ -1,0 +1,339 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>DancerAdapter class / dancer Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="dancer" data-type="DancerAdapter">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../dancer.html">dancer</a> &rsaquo; <a href="../dancer/DancerAdapter.html">DancerAdapter</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>DancerAdapter</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class DancerAdapter implements js.Serializable&lt;js.Proxy&gt; {
+ final js.Proxy _proxy;
+ js.Proxy toJs() =&gt; _proxy;
+
+ DancerAdapter(Dancer dancer) : this._(new js.Proxy(js.context.Dancer.adapters.webkit, dancer));
+ DancerAdapter._(this._proxy);
+
+ Dancer get dancer =&gt; new Dancer._(_proxy.dancer);
+
+ dynamic get audio =&gt; _proxy.audio; // Audio, SMSound, etc...
+ 
+ dynamic get context =&gt; _proxy.audio; // AudioContext, webkitAudioContext, null, etc...
+
+ String get path =&gt; _proxy.path;
+
+ num get progress =&gt; _proxy.progress;
+
+ set isLoaded(bool isLoaded) =&gt; _proxy.isLoaded = isLoaded;
+ 
+ bool get isLoaded =&gt; _proxy.isLoaded;
+
+ set isPlaying(bool isPlaying) =&gt; _proxy.isPlaying = isPlaying;
+ 
+ bool get isPlaying =&gt; _proxy.isPlaying;
+
+ /// `source` can be either an Audio element, if supported, or an object
+ /// either way, the path is stored in the `src` property
+ /// @return Returns audio property value if already loaded.
+ dynamic load( dynamic source) =&gt; _proxy.load( source);
+
+ void play() =&gt; _proxy.play();
+ 
+ void pause() =&gt; _proxy.pause();
+ 
+ void update( e) { _proxy.update( e);}
+
+ void setVolume(num volume) =&gt; _proxy.setVolume(volume);
+
+ num getVolume() =&gt; _proxy.getVolume();
+
+ num getProgress() =&gt; _proxy.getProgress();
+
+ Float32List getWaveform() =&gt; _proxy.getWaveform();
+ 
+ Float32List getSpectrum() =&gt; _proxy.getSpectrum();
+ 
+ num getTime() =&gt; _proxy.getTime();
+
+ // #
+ // # These Other properties appear depending on adaptor's implementation. 
+ // #
+ // fbLength;
+ // channels;
+ // rate;
+ // fft;
+ // MediaElementSource source;
+ // gain;
+ // proc;
+ // wave_L;
+ // wave_R;
+ // spectrum;
+}
+</pre>
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span>Serializable&lt;Proxy&gt;</span></p>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>DancerAdapter</strong>(<a href="../dancer/Dancer.html">Dancer</a> dancer) <a class="anchor-link" href="#"
+              title="Permalink to DancerAdapter.DancerAdapter">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Creates a new <code>Object</code> instance.</p>
+<p><code>Object</code> instances have no meaningful state, and are only useful
+through their identity. An <code>Object</code> instance is equal to itself
+only.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+DancerAdapter(Dancer dancer) : this._(new js.Proxy(js.context.Dancer.adapters.webkit, dancer));
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="audio">
+<button class="show-code">Code</button>
+final         <strong>audio</strong> <a class="anchor-link"
+            href="#audio"
+            title="Permalink to DancerAdapter.audio">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+dynamic get audio =&gt; _proxy.audio;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="context">
+<button class="show-code">Code</button>
+final         <strong>context</strong> <a class="anchor-link"
+            href="#context"
+            title="Permalink to DancerAdapter.context">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+dynamic get context =&gt; _proxy.audio;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dancer">
+<button class="show-code">Code</button>
+final <a href="../dancer/Dancer.html">Dancer</a>         <strong>dancer</strong> <a class="anchor-link"
+            href="#dancer"
+            title="Permalink to DancerAdapter.dancer">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Dancer get dancer =&gt; new Dancer._(_proxy.dancer);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="isLoaded">
+<button class="show-code">Code</button>
+bool         <strong>isLoaded</strong> <a class="anchor-link"
+            href="#isLoaded"
+            title="Permalink to DancerAdapter.isLoaded">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+bool get isLoaded =&gt; _proxy.isLoaded;
+</pre>
+<pre class="source">
+set isLoaded(bool isLoaded) =&gt; _proxy.isLoaded = isLoaded;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="isPlaying">
+<button class="show-code">Code</button>
+bool         <strong>isPlaying</strong> <a class="anchor-link"
+            href="#isPlaying"
+            title="Permalink to DancerAdapter.isPlaying">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+bool get isPlaying =&gt; _proxy.isPlaying;
+</pre>
+<pre class="source">
+set isPlaying(bool isPlaying) =&gt; _proxy.isPlaying = isPlaying;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="path">
+<button class="show-code">Code</button>
+final String         <strong>path</strong> <a class="anchor-link"
+            href="#path"
+            title="Permalink to DancerAdapter.path">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get path =&gt; _proxy.path;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="progress">
+<button class="show-code">Code</button>
+final num         <strong>progress</strong> <a class="anchor-link"
+            href="#progress"
+            title="Permalink to DancerAdapter.progress">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+num get progress =&gt; _proxy.progress;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="getProgress">
+<button class="show-code">Code</button>
+num <strong>getProgress</strong>() <a class="anchor-link" href="#getProgress"
+              title="Permalink to DancerAdapter.getProgress">#</a></h4>
+<div class="doc">
+<pre class="source">
+num getProgress() =&gt; _proxy.getProgress();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getSpectrum">
+<button class="show-code">Code</button>
+Float32List <strong>getSpectrum</strong>() <a class="anchor-link" href="#getSpectrum"
+              title="Permalink to DancerAdapter.getSpectrum">#</a></h4>
+<div class="doc">
+<pre class="source">
+Float32List getSpectrum() =&gt; _proxy.getSpectrum();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getTime">
+<button class="show-code">Code</button>
+num <strong>getTime</strong>() <a class="anchor-link" href="#getTime"
+              title="Permalink to DancerAdapter.getTime">#</a></h4>
+<div class="doc">
+<pre class="source">
+num getTime() =&gt; _proxy.getTime();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getVolume">
+<button class="show-code">Code</button>
+num <strong>getVolume</strong>() <a class="anchor-link" href="#getVolume"
+              title="Permalink to DancerAdapter.getVolume">#</a></h4>
+<div class="doc">
+<pre class="source">
+num getVolume() =&gt; _proxy.getVolume();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getWaveform">
+<button class="show-code">Code</button>
+Float32List <strong>getWaveform</strong>() <a class="anchor-link" href="#getWaveform"
+              title="Permalink to DancerAdapter.getWaveform">#</a></h4>
+<div class="doc">
+<pre class="source">
+Float32List getWaveform() =&gt; _proxy.getWaveform();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="load">
+<button class="show-code">Code</button>
+dynamic <strong>load</strong>(source) <a class="anchor-link" href="#load"
+              title="Permalink to DancerAdapter.load">#</a></h4>
+<div class="doc">
+<p><code>source</code> can be either an Audio element, if supported, or an object
+either way, the path is stored in the <code>src</code> property
+@return Returns audio property value if already loaded.</p>
+<pre class="source">
+dynamic load( dynamic source) =&gt; _proxy.load( source);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="pause">
+<button class="show-code">Code</button>
+void <strong>pause</strong>() <a class="anchor-link" href="#pause"
+              title="Permalink to DancerAdapter.pause">#</a></h4>
+<div class="doc">
+<pre class="source">
+void pause() =&gt; _proxy.pause();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="play">
+<button class="show-code">Code</button>
+void <strong>play</strong>() <a class="anchor-link" href="#play"
+              title="Permalink to DancerAdapter.play">#</a></h4>
+<div class="doc">
+<pre class="source">
+void play() =&gt; _proxy.play();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setVolume">
+<button class="show-code">Code</button>
+void <strong>setVolume</strong>(num volume) <a class="anchor-link" href="#setVolume"
+              title="Permalink to DancerAdapter.setVolume">#</a></h4>
+<div class="doc">
+<pre class="source">
+void setVolume(num volume) =&gt; _proxy.setVolume(volume);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="toJs">
+<button class="show-code">Code</button>
+Proxy <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to DancerAdapter.toJs">#</a></h4>
+<div class="doc">
+<pre class="source">
+js.Proxy toJs() =&gt; _proxy;
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="update">
+<button class="show-code">Code</button>
+void <strong>update</strong>(e) <a class="anchor-link" href="#update"
+              title="Permalink to DancerAdapter.update">#</a></h4>
+<div class="doc">
+<pre class="source">
+void update( e) { _proxy.update( e);}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2014-02-28 03:43:23.608</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

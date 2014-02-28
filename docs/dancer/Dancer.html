@@ -1,0 +1,743 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Dancer class / dancer Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="dancer" data-type="Dancer">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../dancer.html">dancer</a> &rsaquo; <a href="../dancer/Dancer.html">Dancer</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Dancer</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class Dancer implements js.Serializable&lt;js.Proxy&gt; {
+ final js.Proxy _proxy;
+ js.Proxy toJs() =&gt; _proxy;
+ 
+ Dancer() : this._(new js.Proxy(js.context.Dancer));
+ Dancer._(this._proxy);
+
+ /// A property of the Dancer object to return a string of the current Dancer version
+ static String get version =&gt; js.context.Dancer.version;
+
+ static Map&lt;String, DancerAdapter&gt; get adapters =&gt; 
+     jsw.JsObjectToMapAdapter.cast( js.context.Dancer.adapters, 
+         new jsw.Translater&lt;DancerAdapter&gt;(
+             (dynamic js_v) =&gt; js_v != null ? new DancerAdapter._(js_v): null,
+             (DancerAdapter da_v) =&gt; da_v != null ? da_v.toJs(): null));
+
+ set audioAdapter(DancerAdapter audioAdapter) =&gt; _proxy.audioAdapter = audioAdapter.toJs();
+
+ DancerAdapter get audioAdapter =&gt; _proxy.audioAdapter != null ? new DancerAdapter._(_proxy.audioAdapter): null;
+
+ Map&lt;String, dynamic&gt; get events =&gt; jsw.JsObjectToMapAdapter.cast(_proxy.events);
+
+ List&lt;dynamic&gt; get sections =&gt; jsw.JsObjectToListAdapter.cast(_proxy.sections);
+
+ /// Specifies the audio source for the dancer instance. 
+ /// source is an map object with a 'src' property and an optional 'codecs' array. 
+ /// if you specify a map object, the src property can either be a string 
+ /// of the audio path, or a string of the audio path, without the file 
+ /// extension, if you specify a codec array to work across multiple audio 
+ /// implementations
+ Dancer load( Map&lt;String, dynamic&gt; source) {
+   _proxy.load( js.map(source));
+   return this;
+ }
+
+ /// Specifies the audio source for the dancer instance. 
+ /// source is an audio element.
+ Dancer loadFromAudio( AudioElement source) {
+   _proxy.load( source);
+   return this;
+ }
+
+ /* Controls */
+ 
+ /// Plays the audio and begins the dance.
+ Dancer play() {
+   _proxy.play();
+   return this;
+ }
+ 
+ /// Pauses the madness.
+ Dancer pause() {
+   _proxy.pause();
+   return this;
+ }
+
+ /// Sets the player's current volume.
+ Dancer setVolume( num volume) {
+   _proxy.setVolume( volume);
+   return this;
+ }
+
+ /* Actions */
+
+ /// Creates a new kick instance tied to the dancer instance, with an options object passed as an argument. Options listed below.
+ /// &lt;ul&gt;
+ /// &lt;li&gt;&lt;code&gt;frequency&lt;/code&gt; the frequency (element of the spectrum) to check for a spike. Can be a single frequency (number) or a range (2 element array) that uses the frequency with highest amplitude. Default: [ 0, 10 ]&lt;/li&gt;
+ /// &lt;li&gt;&lt;code&gt;threshold&lt;/code&gt; the minimum amplitude of the frequency range in order for a kick to occur. Default: 0.3&lt;/li&gt;
+ /// &lt;li&gt;&lt;code&gt;decay&lt;/code&gt; the rate that the previously registered kick's amplitude is reduced by on every frame. Default: 0.02&lt;/li&gt;
+ /// &lt;li&gt;&lt;code&gt;onKick&lt;/code&gt; the callback to be called when a kick is detected.&lt;/li&gt;
+ /// &lt;li&gt;&lt;code&gt;offKick&lt;/code&gt; the callback to be called when there is no kick on the current frame.&lt;/li&gt;
+ /// &lt;/ul&gt;
+ Kick createKick(KickOptions options) =&gt; new Kick( this, options);
+
+ /// Subscribes a callback of name. Can call this method several times to bind several callbacks of the same name.
+ Dancer bind(String name, DancerBindCallback callback) {
+   _proxy.bind( name, callback);
+   return this;
+ }
+ 
+ /// Unsubscribes all callbacks of name.
+ Dancer unbind(String name) {
+   _proxy.unbind(name);
+   return this;
+ }
+
+ /// Calls all callbacks of name.
+ Dancer trigger(String name) {
+   _proxy.trigger(name);
+   return this;
+ }
+ 
+ /* Getters */
+
+ /// Returns a normalized value (0 to 1) of the current volume.
+ num getVolume() =&gt; _proxy.getVolume();
+
+ /// Returns the downloading progress as a float from 0 to 1.
+ num getProgress() =&gt; _proxy.getProgress();
+
+ /// Returns the current time.
+ num getTime() =&gt; _proxy.getTime();
+
+ /// Returns the magnitude of a frequency or average over a range of frequencies.
+ num getFrequency(num freq, [num endFreq]) =&gt;  
+     endFreq == null ? _proxy.getFrequency( freq): _proxy.getFrequency( freq, endFreq);
+
+ /// Returns the waveform data array (Float32Array(1024))
+ Float32List getWaveform() =&gt; _proxy.getWaveform();
+
+ /// Returns the frequency data array (Float32Array(512))
+ Float32List getSpectrum() =&gt; _proxy.getSpectrum();
+
+ /// Returns a boolean value for the dancer instance's song load state.
+ bool isLoaded() {
+   var loaded = _proxy.isLoaded();
+   return loaded != null ? loaded: false;
+ }
+
+ /// Returns a boolean value indicating whether the dancer instance's song is currently playing or not.
+ bool isPlaying() {
+   var playing = _proxy.isPlaying();
+   return playing != null ? playing: false;
+ }
+
+ /* Sections */
+ 
+ /// Fires callback on every frame after time 'time'.
+ Dancer after(num time, DancerCallback callback) {
+   _proxy.after(time, callback);
+   return this;
+ }
+
+ /// Fires callback on every frame before time 'time'.
+ Dancer before(num time, DancerCallback callback) {
+   _proxy.before(time, callback);
+   return this;
+ }
+
+ /// Fires callback on every frame between time 'startTime' and 'endTime'.
+ Dancer between(num startTime, num endTime, DancerCallback callback) {
+   _proxy.between(startTime, endTime, callback);
+   return this;
+ }
+
+ /// Fires callback once at time 'time'.
+ Dancer onceAt(num time, DancerCallback callback) {
+   _proxy.onceAt(time, callback);
+   return this;
+ }
+
+ // dynamic _toJsDancerCallback(DancerCallback callback) =&gt; () =&gt; callback(this);
+
+ /* Support */
+ 
+ static Map&lt;String, dynamic&gt; get options =&gt; jsw.JsObjectToMapAdapter.cast(js.context.Dancer.options);
+
+ /// Takes a set of key-value pairs in an object for options. Options below.
+ /// &lt;ul&gt;
+ /// &lt;li&gt;&lt;code&gt;flashSWF&lt;/code&gt; The path to soundmanager2.swf. Required for flash fallback.&lt;/li&gt;
+ /// &lt;li&gt;&lt;codeflashJS&lt;/code&gt; The path to soundmanager2.js. Required for flash fallback.&lt;/li&gt;
+ /// &lt;/ul&gt;
+ static void setOptions(Map&lt;String, dynamic&gt; options) =&gt; js.context.Dancer.setOptions(js.map( options));
+
+ /// Returns a string of webaudio, audiodata or flash indicating level of support. Returns an empty string if the browser doesn't support any of the methods. Can also return null when browser does not support typed arrays.
+ static String isSupported() =&gt; js.context.Dancer.isSupported();
+
+ /// Returns either true or false indicating whether the browser supports playing back audio of type type, which can be a string of 'mp3', 'ogg', 'wav', or 'aac'.
+ static bool canPlay( type) =&gt; js.context.Dancer.canPlay(type);
+
+ /// Registers a plugin of name with initiation function fn -- described in more detail below
+ static void addPlugin( String name, dynamic fn) =&gt; js.context.Dancer.addPlugin( name, fn);
+
+ // Browser detection is lame, but Safari 6 has Web Audio API,
+ // but does not support processing audio from a Media Element Source
+ // https://gist.github.com/3265344
+ static bool isUnsupportedSafari() =&gt; js.context.Dancer.isUnsupportedSafari();
+ 
+ /* Plugins */
+ 
+ Dancer fft( CanvasElement canvasEl, [FFTOptions options]) {
+   if (options != null) 
+     _proxy.fft( canvasEl, options.toJs());
+   else
+     _proxy.fft( canvasEl);
+   return this;
+ }
+
+ Dancer waveform( CanvasElement canvasEl, [WaveformOptions options]) {
+   if (options != null) 
+     _proxy.waveform( canvasEl, options.toJs());
+   else
+     _proxy.waveform( canvasEl);
+   return this;
+ }
+}
+</pre>
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span>Serializable&lt;Proxy&gt;</span></p>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="adapters">
+<button class="show-code">Code</button>
+final Map&lt;String, <a href="../dancer/DancerAdapter.html">DancerAdapter</a>&gt;         <strong>adapters</strong> <a class="anchor-link"
+            href="#adapters"
+            title="Permalink to Dancer.adapters">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static Map&lt;String, DancerAdapter&gt; get adapters =&gt; 
+   jsw.JsObjectToMapAdapter.cast( js.context.Dancer.adapters, 
+       new jsw.Translater&lt;DancerAdapter&gt;(
+           (dynamic js_v) =&gt; js_v != null ? new DancerAdapter._(js_v): null,
+           (DancerAdapter da_v) =&gt; da_v != null ? da_v.toJs(): null));
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="options">
+<button class="show-code">Code</button>
+final Map&lt;String, dynamic&gt;         <strong>options</strong> <a class="anchor-link"
+            href="#options"
+            title="Permalink to Dancer.options">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static Map&lt;String, dynamic&gt; get options =&gt; jsw.JsObjectToMapAdapter.cast(js.context.Dancer.options);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="version">
+<button class="show-code">Code</button>
+final String         <strong>version</strong> <a class="anchor-link"
+            href="#version"
+            title="Permalink to Dancer.version">#</a>
+        </h4>
+        <div class="doc">
+<p>A property of the Dancer object to return a string of the current Dancer version</p>
+<pre class="source">
+static String get version =&gt; js.context.Dancer.version;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="setOptions">
+<button class="show-code">Code</button>
+void <strong>setOptions</strong>(Map&lt;String, dynamic&gt; options) <a class="anchor-link" href="#setOptions"
+              title="Permalink to Dancer.setOptions">#</a></h4>
+<div class="doc">
+<p>Takes a set of key-value pairs in an object for options. Options below.
+&lt;ul>
+&lt;li>&lt;code>flashSWF&lt;/code> The path to soundmanager2.swf. Required for flash fallback.&lt;/li>
+&lt;li>&lt;codeflashJS&lt;/code> The path to soundmanager2.js. Required for flash fallback.&lt;/li>
+&lt;/ul></p>
+<pre class="source">
+static void setOptions(Map&lt;String, dynamic&gt; options) =&gt; js.context.Dancer.setOptions(js.map( options));
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isSupported">
+<button class="show-code">Code</button>
+String <strong>isSupported</strong>() <a class="anchor-link" href="#isSupported"
+              title="Permalink to Dancer.isSupported">#</a></h4>
+<div class="doc">
+<p>Returns a string of webaudio, audiodata or flash indicating level of support. Returns an empty string if the browser doesn't support any of the methods. Can also return null when browser does not support typed arrays.</p>
+<pre class="source">
+static String isSupported() =&gt; js.context.Dancer.isSupported();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="canPlay">
+<button class="show-code">Code</button>
+bool <strong>canPlay</strong>(type) <a class="anchor-link" href="#canPlay"
+              title="Permalink to Dancer.canPlay">#</a></h4>
+<div class="doc">
+<p>Returns either true or false indicating whether the browser supports playing back audio of type type, which can be a string of 'mp3', 'ogg', 'wav', or 'aac'.</p>
+<pre class="source">
+static bool canPlay( type) =&gt; js.context.Dancer.canPlay(type);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="addPlugin">
+<button class="show-code">Code</button>
+void <strong>addPlugin</strong>(String name, fn) <a class="anchor-link" href="#addPlugin"
+              title="Permalink to Dancer.addPlugin">#</a></h4>
+<div class="doc">
+<p>Registers a plugin of name with initiation function fn -- described in more detail below</p>
+<pre class="source">
+static void addPlugin( String name, dynamic fn) =&gt; js.context.Dancer.addPlugin( name, fn);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isUnsupportedSafari">
+<button class="show-code">Code</button>
+bool <strong>isUnsupportedSafari</strong>() <a class="anchor-link" href="#isUnsupportedSafari"
+              title="Permalink to Dancer.isUnsupportedSafari">#</a></h4>
+<div class="doc">
+<pre class="source">
+static bool isUnsupportedSafari() =&gt; js.context.Dancer.isUnsupportedSafari();
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+new <strong>Dancer</strong>() <a class="anchor-link" href="#"
+              title="Permalink to Dancer.Dancer">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Creates a new <code>Object</code> instance.</p>
+<p><code>Object</code> instances have no meaningful state, and are only useful
+through their identity. An <code>Object</code> instance is equal to itself
+only.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+Dancer() : this._(new js.Proxy(js.context.Dancer));
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="audioAdapter">
+<button class="show-code">Code</button>
+<a href="../dancer/DancerAdapter.html">DancerAdapter</a>         <strong>audioAdapter</strong> <a class="anchor-link"
+            href="#audioAdapter"
+            title="Permalink to Dancer.audioAdapter">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+DancerAdapter get audioAdapter =&gt; _proxy.audioAdapter != null ? new DancerAdapter._(_proxy.audioAdapter): null;
+</pre>
+<pre class="source">
+set audioAdapter(DancerAdapter audioAdapter) =&gt; _proxy.audioAdapter = audioAdapter.toJs();
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="events">
+<button class="show-code">Code</button>
+final Map&lt;String, dynamic&gt;         <strong>events</strong> <a class="anchor-link"
+            href="#events"
+            title="Permalink to Dancer.events">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Map&lt;String, dynamic&gt; get events =&gt; jsw.JsObjectToMapAdapter.cast(_proxy.events);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="sections">
+<button class="show-code">Code</button>
+final List&lt;dynamic&gt;         <strong>sections</strong> <a class="anchor-link"
+            href="#sections"
+            title="Permalink to Dancer.sections">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+List&lt;dynamic&gt; get sections =&gt; jsw.JsObjectToListAdapter.cast(_proxy.sections);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="after">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>after</strong>(num time, <a href="../dancer/DancerCallback.html">DancerCallback</a> callback) <a class="anchor-link" href="#after"
+              title="Permalink to Dancer.after">#</a></h4>
+<div class="doc">
+<p>Fires callback on every frame after time 'time'.</p>
+<pre class="source">
+Dancer after(num time, DancerCallback callback) {
+ _proxy.after(time, callback);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="before">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>before</strong>(num time, <a href="../dancer/DancerCallback.html">DancerCallback</a> callback) <a class="anchor-link" href="#before"
+              title="Permalink to Dancer.before">#</a></h4>
+<div class="doc">
+<p>Fires callback on every frame before time 'time'.</p>
+<pre class="source">
+Dancer before(num time, DancerCallback callback) {
+ _proxy.before(time, callback);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="between">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>between</strong>(num startTime, num endTime, <a href="../dancer/DancerCallback.html">DancerCallback</a> callback) <a class="anchor-link" href="#between"
+              title="Permalink to Dancer.between">#</a></h4>
+<div class="doc">
+<p>Fires callback on every frame between time 'startTime' and 'endTime'.</p>
+<pre class="source">
+Dancer between(num startTime, num endTime, DancerCallback callback) {
+ _proxy.between(startTime, endTime, callback);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="bind">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>bind</strong>(String name, <a href="../dancer/DancerBindCallback.html">DancerBindCallback</a> callback) <a class="anchor-link" href="#bind"
+              title="Permalink to Dancer.bind">#</a></h4>
+<div class="doc">
+<p>Subscribes a callback of name. Can call this method several times to bind several callbacks of the same name.</p>
+<pre class="source">
+Dancer bind(String name, DancerBindCallback callback) {
+ _proxy.bind( name, callback);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="createKick">
+<button class="show-code">Code</button>
+<a href="../dancer/Kick.html">Kick</a> <strong>createKick</strong>(<a href="../dancer/KickOptions.html">KickOptions</a> options) <a class="anchor-link" href="#createKick"
+              title="Permalink to Dancer.createKick">#</a></h4>
+<div class="doc">
+<p>Creates a new kick instance tied to the dancer instance, with an options object passed as an argument. Options listed below.
+&lt;ul>
+&lt;li>&lt;code>frequency&lt;/code> the frequency (element of the spectrum) to check for a spike. Can be a single frequency (number) or a range (2 element array) that uses the frequency with highest amplitude. Default: <code> 0, 10 </code>&lt;/li>
+&lt;li>&lt;code>threshold&lt;/code> the minimum amplitude of the frequency range in order for a kick to occur. Default: 0.3&lt;/li>
+&lt;li>&lt;code>decay&lt;/code> the rate that the previously registered kick's amplitude is reduced by on every frame. Default: 0.02&lt;/li>
+&lt;li>&lt;code>onKick&lt;/code> the callback to be called when a kick is detected.&lt;/li>
+&lt;li>&lt;code>offKick&lt;/code> the callback to be called when there is no kick on the current frame.&lt;/li>
+&lt;/ul></p>
+<pre class="source">
+Kick createKick(KickOptions options) =&gt; new Kick( this, options);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fft">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>fft</strong>(CanvasElement canvasEl, [<a href="../dancer/FFTOptions.html">FFTOptions</a> options]) <a class="anchor-link" href="#fft"
+              title="Permalink to Dancer.fft">#</a></h4>
+<div class="doc">
+<pre class="source">
+Dancer fft( CanvasElement canvasEl, [FFTOptions options]) {
+ if (options != null) 
+   _proxy.fft( canvasEl, options.toJs());
+ else
+   _proxy.fft( canvasEl);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getFrequency">
+<button class="show-code">Code</button>
+num <strong>getFrequency</strong>(num freq, [num endFreq]) <a class="anchor-link" href="#getFrequency"
+              title="Permalink to Dancer.getFrequency">#</a></h4>
+<div class="doc">
+<p>Returns the magnitude of a frequency or average over a range of frequencies.</p>
+<pre class="source">
+num getFrequency(num freq, [num endFreq]) =&gt;  
+   endFreq == null ? _proxy.getFrequency( freq): _proxy.getFrequency( freq, endFreq);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getProgress">
+<button class="show-code">Code</button>
+num <strong>getProgress</strong>() <a class="anchor-link" href="#getProgress"
+              title="Permalink to Dancer.getProgress">#</a></h4>
+<div class="doc">
+<p>Returns the downloading progress as a float from 0 to 1.</p>
+<pre class="source">
+num getProgress() =&gt; _proxy.getProgress();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getSpectrum">
+<button class="show-code">Code</button>
+Float32List <strong>getSpectrum</strong>() <a class="anchor-link" href="#getSpectrum"
+              title="Permalink to Dancer.getSpectrum">#</a></h4>
+<div class="doc">
+<p>Returns the frequency data array (Float32Array(512))</p>
+<pre class="source">
+Float32List getSpectrum() =&gt; _proxy.getSpectrum();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getTime">
+<button class="show-code">Code</button>
+num <strong>getTime</strong>() <a class="anchor-link" href="#getTime"
+              title="Permalink to Dancer.getTime">#</a></h4>
+<div class="doc">
+<p>Returns the current time.</p>
+<pre class="source">
+num getTime() =&gt; _proxy.getTime();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getVolume">
+<button class="show-code">Code</button>
+num <strong>getVolume</strong>() <a class="anchor-link" href="#getVolume"
+              title="Permalink to Dancer.getVolume">#</a></h4>
+<div class="doc">
+<p>Returns a normalized value (0 to 1) of the current volume.</p>
+<pre class="source">
+num getVolume() =&gt; _proxy.getVolume();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getWaveform">
+<button class="show-code">Code</button>
+Float32List <strong>getWaveform</strong>() <a class="anchor-link" href="#getWaveform"
+              title="Permalink to Dancer.getWaveform">#</a></h4>
+<div class="doc">
+<p>Returns the waveform data array (Float32Array(1024))</p>
+<pre class="source">
+Float32List getWaveform() =&gt; _proxy.getWaveform();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isLoaded">
+<button class="show-code">Code</button>
+bool <strong>isLoaded</strong>() <a class="anchor-link" href="#isLoaded"
+              title="Permalink to Dancer.isLoaded">#</a></h4>
+<div class="doc">
+<p>Returns a boolean value for the dancer instance's song load state.</p>
+<pre class="source">
+bool isLoaded() {
+ var loaded = _proxy.isLoaded();
+ return loaded != null ? loaded: false;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isPlaying">
+<button class="show-code">Code</button>
+bool <strong>isPlaying</strong>() <a class="anchor-link" href="#isPlaying"
+              title="Permalink to Dancer.isPlaying">#</a></h4>
+<div class="doc">
+<p>Returns a boolean value indicating whether the dancer instance's song is currently playing or not.</p>
+<pre class="source">
+bool isPlaying() {
+ var playing = _proxy.isPlaying();
+ return playing != null ? playing: false;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="load">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>load</strong>(Map&lt;String, dynamic&gt; source) <a class="anchor-link" href="#load"
+              title="Permalink to Dancer.load">#</a></h4>
+<div class="doc">
+<p>Specifies the audio source for the dancer instance. 
+source is an map object with a 'src' property and an optional 'codecs' array. 
+if you specify a map object, the src property can either be a string 
+of the audio path, or a string of the audio path, without the file 
+extension, if you specify a codec array to work across multiple audio 
+implementations</p>
+<pre class="source">
+Dancer load( Map&lt;String, dynamic&gt; source) {
+ _proxy.load( js.map(source));
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="loadFromAudio">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>loadFromAudio</strong>(AudioElement source) <a class="anchor-link" href="#loadFromAudio"
+              title="Permalink to Dancer.loadFromAudio">#</a></h4>
+<div class="doc">
+<p>Specifies the audio source for the dancer instance. 
+source is an audio element.</p>
+<pre class="source">
+Dancer loadFromAudio( AudioElement source) {
+ _proxy.load( source);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="onceAt">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>onceAt</strong>(num time, <a href="../dancer/DancerCallback.html">DancerCallback</a> callback) <a class="anchor-link" href="#onceAt"
+              title="Permalink to Dancer.onceAt">#</a></h4>
+<div class="doc">
+<p>Fires callback once at time 'time'.</p>
+<pre class="source">
+Dancer onceAt(num time, DancerCallback callback) {
+ _proxy.onceAt(time, callback);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="pause">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>pause</strong>() <a class="anchor-link" href="#pause"
+              title="Permalink to Dancer.pause">#</a></h4>
+<div class="doc">
+<p>Pauses the madness.</p>
+<pre class="source">
+Dancer pause() {
+ _proxy.pause();
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="play">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>play</strong>() <a class="anchor-link" href="#play"
+              title="Permalink to Dancer.play">#</a></h4>
+<div class="doc">
+<p>Plays the audio and begins the dance.</p>
+<pre class="source">
+Dancer play() {
+ _proxy.play();
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setVolume">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>setVolume</strong>(num volume) <a class="anchor-link" href="#setVolume"
+              title="Permalink to Dancer.setVolume">#</a></h4>
+<div class="doc">
+<p>Sets the player's current volume.</p>
+<pre class="source">
+Dancer setVolume( num volume) {
+ _proxy.setVolume( volume);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="toJs">
+<button class="show-code">Code</button>
+Proxy <strong>toJs</strong>() <a class="anchor-link" href="#toJs"
+              title="Permalink to Dancer.toJs">#</a></h4>
+<div class="doc">
+<pre class="source">
+js.Proxy toJs() =&gt; _proxy;
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="trigger">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>trigger</strong>(String name) <a class="anchor-link" href="#trigger"
+              title="Permalink to Dancer.trigger">#</a></h4>
+<div class="doc">
+<p>Calls all callbacks of name.</p>
+<pre class="source">
+Dancer trigger(String name) {
+ _proxy.trigger(name);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="unbind">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>unbind</strong>(String name) <a class="anchor-link" href="#unbind"
+              title="Permalink to Dancer.unbind">#</a></h4>
+<div class="doc">
+<p>Unsubscribes all callbacks of name.</p>
+<pre class="source">
+Dancer unbind(String name) {
+ _proxy.unbind(name);
+ return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="waveform">
+<button class="show-code">Code</button>
+<a href="../dancer/Dancer.html">Dancer</a> <strong>waveform</strong>(CanvasElement canvasEl, [<a href="../dancer/WaveformOptions.html">WaveformOptions</a> options]) <a class="anchor-link" href="#waveform"
+              title="Permalink to Dancer.waveform">#</a></h4>
+<div class="doc">
+<pre class="source">
+Dancer waveform( CanvasElement canvasEl, [WaveformOptions options]) {
+ if (options != null) 
+   _proxy.waveform( canvasEl, options.toJs());
+ else
+   _proxy.waveform( canvasEl);
+ return this;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2014-02-28 03:43:23.546</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

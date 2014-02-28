@@ -1,5 +1,10 @@
 name: dancer
-description: A sample web application
+author: Hiroshi Yamamoto
+version: 0.3.2
+homepage: http://github.com/hyamamoto/dancer.dart
+description: High-level audio API, designed to make sweet visualizations.
+environment:
+  sdk: '>1.1.0'
 dependencies:
   browser: any
   js: any
