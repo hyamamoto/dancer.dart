@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dancer.dart</title>
+    <link rel="stylesheet" href="../dancer.css">
+  </head>
+  <body>
+    <h1>dancer.dart</h1>
+
+    <div id="info">
+      <h1>dancer.dart</h1>
+      <h2>Audio Library</h2>
+      <h3>Audio Play/Stop</h3>
+      <ul>
+        <li><a href="https://github.com/hyamamoto/dancer.dart" title="on GitHub">view Source</a></li>
+        <li>by Hiroshi Yamamoto</li>
+      </ul>
+    </div>
+<!--
+    <audio id="audio" controls="controls">
+      <source id="song_1" src="./songs/zircon_devils_spirit.ogg" type="audio/ogg" />
+      Your browser does not support the audio tag.
+    </audio>
+--> 
+    <div id="sample_container_id">
+      <p id="sample_text_id"></p>
+    </div>
+
+    <!-- dancer.dart dependencies -->
+    <script type="text/javascript" src="packages/dancer/src/js/dancer.js"></script>   
+
+    <!-- play_stop.dart -->
+    <script type="application/dart" src="play_stop.dart"></script>
+    <script type="text/javascript" src="packages/browser/dart.js"></script>
+    <script type="text/javascript" src="packages/browser/interop.js"></script>
+  </body>
+</html>

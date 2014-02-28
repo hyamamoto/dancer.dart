@@ -7,7 +7,7 @@ dartium
 
 tmp/
 
-packages
+/packages
 
 web/packages
 web/**/packages
