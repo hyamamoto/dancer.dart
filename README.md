@@ -16,13 +16,15 @@ Features
 Live Examples
 ---
 
-* [Simple Player](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/play_stop/play_stop.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/play_stop/))  
+** These examples are not yet live (2/28/2014) . Will be fixed shortly. **
+
+* [Simple Player](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/play_stop/play_stop.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/play_stop/))  
     Simple audio player with Play/Stop button.
-* [FFT](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/fft/fft.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/fft/))  
+* [FFT](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/fft/fft.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/fft/))  
     Realtime 'Fast Fourier Transform' visualizer.
-* [Waveform](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/waveform/waveform.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/waveform/))  
+* [Waveform](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/waveform/waveform.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/waveform/))  
     Waveform analysis.
-* [Song Demo](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/web/song_demo/song_demo.html) ([source](http://github.com/hyamamoto/dancer.dart/build/web/song_demo/))  
+* [Song Demo](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/build/song_demo/song_demo.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/song_demo/))  
     Beat detection linked with 3D visual effects by three.js .
 
 API Document

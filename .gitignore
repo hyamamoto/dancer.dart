@@ -5,9 +5,9 @@ Thumbs.db
 dart-sdk
 dartium
 
-tmp/
-
+/tmp
 /packages
+/build
 
 web/packages
 web/**/packages
