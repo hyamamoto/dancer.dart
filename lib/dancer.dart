@@ -6,7 +6,6 @@ import 'dart:typed_data';
 import 'dart:html';
 import 'package:js/js.dart' as js;
 import 'package:js/js_wrapping.dart' as jsw;
-// import 'dart:web_audio';
 
 part 'src/kick.dart';
 part 'src/adaptor.dart';

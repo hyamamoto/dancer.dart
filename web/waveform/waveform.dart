@@ -1,24 +1,27 @@
 import 'dart:html';
+import 'dart:async';
 
 import 'package:dancer/dancer.dart';
 
 const String AUDIO_FILE = '../songs/tonetest';
 
 void loaded (Dancer dancer) {
-  var
+  final 
     loading = document.getElementById( 'loading' ),
     anchor  = document.createElement('A'),
     supported = Dancer.isSupported(),
-    hasSupported = supported != null && supported.isNotEmpty;
+    hasSupport = supported != null && supported.isNotEmpty;
 
-  anchor.text = hasSupported ? 'Play!' : 'Close';
+  anchor.text = hasSupport ? 'Play!' : 'Close';
   anchor.setAttribute( 'href', '#' );
   loading.innerHtml = '';
   loading.append( anchor );
 
-  if ( !hasSupported ) {
-    var p = document.createElement('P');
-    p.text = 'Your browser does not currently support either Web Audio API or Audio Data API. The audio may play, but the visualizers will not move to the music; check out the latest Chrome or Firefox browsers!';
+  if ( !hasSupport ) {
+    final p = document.createElement('P')
+      ..text = """Your browser does not currently support either Web Audio API or 
+Audio Data API. The audio may play, but the visualizers will not move 
+to the music; check out the latest Chrome or Firefox browsers!""";
     loading.append( p );
   }
 
@@ -29,9 +32,9 @@ void loaded (Dancer dancer) {
 }
 
 void main() {
-
-  final CanvasElement waveform = document.getElementById( 'waveform' );
-  final CanvasRenderingContext2D ctx = waveform.context2D;
+  final
+    CanvasElement waveform = document.getElementById( 'waveform' );
+    CanvasRenderingContext2D ctx = waveform.context2D;
   
   // Flash audio fallback support
   Dancer.setOptions({
@@ -57,14 +60,16 @@ void main() {
         .waveform( waveform, new WaveformOptions()
           ..strokeStyle = '#666'
           ..strokeWidth = 2 );
-  
+
   final String supported = Dancer.isSupported();
-  if ( supported != null && supported.isNotEmpty) {
+  if ( supported == null || supported.isEmpty) {
     loaded(dancer);
   }
-  if (!dancer.isLoaded()) {
-    dancer.bind( 'loaded', () => loaded(dancer) );
-  } else {
-    loaded(dancer);
-  }
+  new Timer(new Duration(milliseconds:0), () {
+    if (!dancer.isLoaded()) {
+      dancer.bind( 'loaded', () => loaded(dancer) );
+    } else {
+      loaded(dancer);
+    }
+  });
 }

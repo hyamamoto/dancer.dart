@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:js/js.dart' as js;
@@ -7,21 +8,24 @@ import 'package:dancer/dancer.dart';
 
 const String AUDIO_FILE = '../songs/deux_hirondelles';
 final List<String> AUDIO_CODECS = [ 'ogg', 'mp3' ];
+final int ROTATE_SPEED = 1;
 
 const
-  PARTICLE_COUNT    = 128,
+  PARTICLE_COUNT    = 192,
   MAX_PARTICLE_SIZE = 12,
   MIN_PARTICLE_SIZE = 2,
   GROWTH_RATE       = 5,
   DECAY_RATE        = 0.5,
   BEAM_RATE         = 0.5,
-  BEAM_COUNT        = 12;
+  BEAM_COUNT        = 18;
 
 final
-  GROWTH_VECTOR = new js.Proxy(Vector3, GROWTH_RATE, GROWTH_RATE, GROWTH_RATE ),
+  GROWTH_VECTOR   = new js.Proxy(Vector3, GROWTH_RATE, GROWTH_RATE, GROWTH_RATE ),
   DECAY_VECTOR  = new js.Proxy(Vector3, DECAY_RATE, DECAY_RATE, DECAY_RATE ),
   beamGroup     = new js.Proxy(Object3D),
-  colors        = [ 0xaaee22, 0x04dbe5, 0xff0077, 0xffb412, 0xf6c83d ];
+  colors        = [ 0xaaee22, 0x04dbe5, 0xff0077, 0xffb412, 0xf6c83d ],
+  random = new math.Random(),
+  sprites = [ 'pink', 'orange', 'yellow', 'blue', 'green' ];
 
 // three.js proxies
 final js.Proxy THREE = js.context.THREE;
@@ -38,20 +42,22 @@ final js.Proxy PerspectiveCamera = js.context.THREE.PerspectiveCamera;
 final js.Proxy Stats = js.context.Stats;
 
 void loaded (Dancer dancer) {
-  var
+  final
     loading = document.getElementById( 'loading' ),
     anchor  = document.createElement('A'),
     supported = Dancer.isSupported(),
-    hasSupported = supported != null && supported.isNotEmpty;
+    hasSupport = supported != null && supported.isNotEmpty;
 
-  anchor.text = hasSupported ? 'Play!' : 'Close';
+  anchor.text = hasSupport ? 'Play!' : 'Close';
   anchor.setAttribute( 'href', '#' );
   loading.innerHtml = '';
   loading.append( anchor );
 
-  if ( !hasSupported ) {
-    var p = document.createElement('P')
-      ..text = 'Your browser does not currently support either Web Audio API or Audio Data API. The audio may play, but the visualizers will not move to the music; check out the latest Chrome or Firefox browsers!';
+  if ( !hasSupport ) {
+    final p = document.createElement('P')
+      ..text = """Your browser does not currently support either Web Audio API or 
+Audio Data API. The audio may play, but the visualizers will not move 
+to the music; check out the latest Chrome or Firefox browsers!""";
     loading.append( p );
   }
 
@@ -76,19 +82,19 @@ void main() {
     final Dancer dancer = new Dancer();
 
     // Add a Kick for the star tinkering.
+    final js.Proxy particles = group.children;
     final Kick kick = dancer.createKick( new KickOptions()
-        ..onKick = (num mag) {
-          final particles = group.children;
-          var i;
+        ..onKick = ( mag) {
+          int i;
           if ( particles[ 0 ].scale.x > MAX_PARTICLE_SIZE ) {
             decay( mag);
           } else {
-            for ( int i = PARTICLE_COUNT - 1; i >= 0; i-- ) {
+            for ( i = PARTICLE_COUNT - 1; i >= 0; i-- ) {
               particles[ i ].scale.addSelf( GROWTH_VECTOR );
             }
           }
           if ( !beamGroup.children[ 0 ].visible ) {
-            for ( int i = BEAM_COUNT - 1; i >= 0; i--) {
+            for ( i = BEAM_COUNT - 1; i >= 0; i--) {
               beamGroup.children[ i ].visible = true;
             }
           }
@@ -96,30 +102,35 @@ void main() {
         ..offKick = decay );
     
     // Schedule time events then load an audio file.
-    dancer.onceAt( 0.0, () {
+    dancer.onceAt( 0, () {
       kick.on();
     }).onceAt( 8.2, () {
       scene.add( beamGroup );
     }).after( 8.2, () {
       beamGroup.rotation.x += BEAM_RATE;
       beamGroup.rotation.y += BEAM_RATE;
-    }).onceAt( 50.0, () {
+    }).onceAt( 50, () {
       changeParticleMat( 'white' );
     }).onceAt( 66.5, () {
       changeParticleMat( 'pink' );
-    }).onceAt( 75.0, () {
-      changeParticleMat();
-    }).load({ 'src': AUDIO_FILE, 'codecs': AUDIO_CODECS});
+    }).onceAt( 75, () {
+      changeParticleMatRandom();
+    });
+    
+    // Load an audio
+    dancer.load({ 'src': AUDIO_FILE, 'codecs': AUDIO_CODECS});
 
     final String supported = Dancer.isSupported();
-    if ( supported != null && supported.isNotEmpty) {
+    if ( supported == null || supported.isEmpty) {
       loaded(dancer);
     }
-    if (!dancer.isLoaded()) {
-      dancer.bind( 'loaded', () => loaded(dancer) );
-    } else {
-      loaded(dancer);
-    }
+    new Timer(new Duration(milliseconds:0), () {
+      if (!dancer.isLoaded()) {
+        dancer.bind( 'loaded', () => loaded(dancer) );
+      } else {
+        loaded(dancer);
+      }
+    });
 
     // Uncomment below and add "<canvas id='fft'>..." in html
     // if you want FFT vasualizer.
@@ -132,72 +143,71 @@ void main() {
 }
 
 void on () {
-  final math.Random random = new math.Random();
 
   for ( int i = PARTICLE_COUNT - 1; i >= 0; i--) {
-    var particle = new js.Proxy(Particle,  newParticleMat() );
-    particle.position.x = random.nextDouble() * 2000 - 1000;
-    particle.position.y = random.nextDouble() * 2000 - 1000;
-    particle.position.z = random.nextDouble() * 2000 - 1000;
-    particle.scale.x = particle.scale.y = random.nextDouble() * 10 + 5;
+    final js.Proxy particle = new js.Proxy(Particle,  newParticleMat( sprites[ random.nextInt(5)]) )
+      ..position.x = random.nextInt( 2000) - 1000
+      ..position.y = random.nextInt( 2000) - 1000
+      ..position.z = random.nextInt( 2000) - 1000
+      ..scale.x = random.nextInt( 10) + 5;
+    particle.scale.y = particle.scale.x;
     group.add( particle );
   }
   scene.add( group );
 
-  var
-    beamGeometry = new js.Proxy(PlaneGeometry, 5000, 50, 1, 1 ),
-    beamMaterial, beam;
+  final beamGeometry = new js.Proxy(PlaneGeometry, 5000, 50, 1, 1 );
 
   for ( int i = BEAM_COUNT - 1; i >= 0; i--) {
-    beamMaterial = new js.Proxy(MeshBasicMaterial, js.map({
+    final beamMaterial = new js.Proxy(MeshBasicMaterial, js.map({
       'opacity': 0.5,
       'blending': THREE.AdditiveBlending,
       'depthTest': false,
-      'color': colors[ ( random.nextDouble() * 5 ).toInt()]
+      'color': colors[ random.nextInt( 5)]
     }));
-    beam = new js.Proxy( Mesh, beamGeometry, beamMaterial );
-    beam.doubleSided = true;
-    beam.rotation.x = random.nextDouble() * math.PI;
-    beam.rotation.y = random.nextDouble() * math.PI;
-    beam.rotation.z = random.nextDouble() * math.PI;
+
+    final beam = new js.Proxy( Mesh, beamGeometry, beamMaterial )
+      ..doubleSided = true
+      ..rotation.x = random.nextDouble() * math.PI
+      ..rotation.y = random.nextDouble() * math.PI
+      ..rotation.z = random.nextDouble() * math.PI;
     beamGroup.add( beam );
   }
 }
 
-void decay ( num mag) {
-  final particles = group.children;
-
-  if ( beamGroup.children[ 0 ].visible ) {
+void decay ( mag) {
+  final js.Proxy beanChildren = beamGroup.children;
+  if ( beanChildren[ 0 ].visible ) {
     for ( int i = BEAM_COUNT - 1; i >= 0; i--) {
-      beamGroup.children[ i ].visible = false;
+      beanChildren[ i ].visible = false;
     }
   }
 
+  final js.Proxy particles = group.children;
   for ( int i = PARTICLE_COUNT - 1; i >= 0; i--) {
-    var particle_scale = particles[i].scale;
-    if ( particle_scale.x - DECAY_RATE > MIN_PARTICLE_SIZE ) {
+    final js.Proxy particle_scale = particles[i].scale;
+    if ( particle_scale.x > MIN_PARTICLE_SIZE + DECAY_RATE) {
       particle_scale.subSelf( DECAY_VECTOR );
     }
   }
 }
 
-void changeParticleMat ( [String color] ) {
-  final particles = group.children;
-
-  var mat = newParticleMat( color );
+void changeParticleMatRandom () {
+  final js.Proxy particles = group.children;
   for ( int i = PARTICLE_COUNT - 1; i >= 0; i--) {
-    if ( color != null) {
-      mat = newParticleMat(); // ParticleBasicMaterial
-    }
-    particles[ i ].material = mat;
+    final String sprite = sprites[ random.nextInt(5)];
+    particles[i].material = newParticleMat( sprite); // ParticleBasicMaterial
   }
 }
 
-js.Proxy newParticleMat( [String color] ) {
-  var
-    sprites = [ 'pink', 'orange', 'yellow', 'blue', 'green' ],
-    sprite = color != null ? color : sprites[ ( new math.Random().nextDouble() * 5 ).toInt()];
+void changeParticleMat ( String sprite) {
+  final js.Proxy particles = group.children;
+  final mat = newParticleMat( sprite );
+  for ( int i = PARTICLE_COUNT - 1; i >= 0; i--) {
+    particles[i].material = mat;
+  }
+}
 
+js.Proxy newParticleMat( String sprite) {
   return new js.Proxy(ParticleBasicMaterial, js.map({
     'blending': THREE.AdditiveBlending,
     'size': MIN_PARTICLE_SIZE,
@@ -207,24 +217,24 @@ js.Proxy newParticleMat( [String color] ) {
 }
 
 // Exproted variables for main() from initScene()
-var rotateSpeed = 1;
-var scene = new js.Proxy(Scene);
-var group = new js.Proxy(Object3D);
+final
+  scene = new js.Proxy(Scene),
+  group = new js.Proxy(Object3D);
 var camera;
 
 initScene() {
-  var container;
-  var renderer, particle;
-  var mouseX = 0, mouseY = 0;
+  DivElement container;
+  js.Proxy renderer;
+  int mouseX = 0, mouseY = 0;
 
-  var stats = new js.Proxy( Stats);
+  final stats = new js.Proxy( Stats);
   stats.domElement.id = 'stats';
   document.getElementById('info').insertBefore( stats.domElement, document.getElementById('togglefft') );
 
-  var windowHalfX = window.innerWidth / 2;
-  var windowHalfY = window.innerHeight / 2;
-
   var init =() {
+    final windowHalfX = window.innerWidth / 2;
+    final windowHalfY = window.innerHeight / 2;
+
     container = document.createElement( 'div' );
     document.body.append( container );
     camera = new js.Proxy(PerspectiveCamera, 75, window.innerWidth / window.innerHeight, 1, 3000 );
@@ -237,12 +247,12 @@ initScene() {
     renderer.setSize( window.innerWidth, window.innerHeight );
     container.append( renderer.domElement );
 
-    var onDocumentMouseMove = ( MouseEvent event ) {
+    final Function onDocumentMouseMove = ( MouseEvent event ) {
       mouseX = event.client.x - windowHalfX;
       mouseY = event.client.y - windowHalfY;
     };
 
-    var onDocumentTouch = ( TouchEvent event ) {
+    final Function onDocumentTouch = ( TouchEvent event ) {
       if ( event.touches.length == 1 ) {
         event.preventDefault();
         mouseX = event.touches[ 0 ].page.x - windowHalfX;
@@ -255,24 +265,23 @@ initScene() {
     document.addEventListener( 'touchmove', onDocumentTouch, false );
   };
 
-  var t = 0;
-  var render = () {
-    camera.position.x = math.sin(t * 0.005 * rotateSpeed) * 1000;
-    camera.position.z = math.cos(t * 0.005 * rotateSpeed) * 1000;
-    camera.position.y += ( - mouseY - camera.position.y ) * 0.01;
-    camera.lookAt( scene.position );
-    t++;
-    renderer.render( scene, camera );
-  };
+  int t = 0;
+  Function animate;
+  animate = (num frame) {
+    js.context.requestAnimationFrame( animate );
 
-  var animate = ( var next_animate) {
-    js.context.requestAnimationFrame( ( frame) => next_animate(next_animate) );
-    render();
+    camera
+      ..position.x = math.sin(t * 0.005 * ROTATE_SPEED) * 1000
+      ..position.z = math.cos(t * 0.005 * ROTATE_SPEED) * 1000
+      ..position.y += ( - mouseY - camera.position.y ) * 0.01
+      ..lookAt( scene.position );
+    t++;
+
+    renderer.render( scene, camera );
+
     stats.update();
   };
 
   init();
-  animate( animate);
-
+  animate( 0);
 }
-

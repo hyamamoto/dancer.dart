@@ -1,10 +1,11 @@
-body {
-  background-color: #F8F8F8;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.2em;
-  margin: 15px;
+@font-face {
+    font-family: 'League Gothic';
+    src: url('fonts/League_Gothic-webfont.eot');
+    src: url('fonts/League_Gothic-webfont.eot?') format('embedded-opentype'),
+    url('fonts/League_Gothic-webfont.woff') format('woff'),
+    url('fonts/League_Gothic-webfont.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 body {
@@ -22,8 +23,6 @@ h1, p {
   width: 100%;
   height: 400px;
   position: relative;
-  border: 1px solid #ccc;
-  background-color: #fff;
 }
 
 #sample_text_id {

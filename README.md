@@ -2,7 +2,7 @@
 
 A Dart package "dancer" is a high level audio library for HTML5 with a Flash fallback. It is implemented as a [dancer.js](https://github.com/jsantell/dancer.js) wrapper.
 
-_version 0.4.0+3 (3/1/2014)_
+_version 0.4.0+4 (3/1/2014)_
 
 Features
 ---
@@ -79,11 +79,12 @@ Dependencies
 Change Logs
 ----
 
+** 0.4.0+4 (3/1/2014) **
+* Dependency fix (newly released 'browser =0.10.0' is still buggy.)
+* Updated all examples.
+
 ** 0.4.0 (2/28/2014)**  
 * Complete wrapper of dancer.js v0.4.0.
-    
-** 0.0.1 (2/27/2014)**  
-* Prottype based on dancer.js v0.0.1
 
 License
 ----
