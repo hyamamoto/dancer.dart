@@ -2,7 +2,7 @@
 
 A Dart package "dancer" is a high level audio library for HTML5 with a Flash fallback. It is implemented as a [dancer.js](https://github.com/jsantell/dancer.js) wrapper.
 
-_version 0.4.0 (2/28/2014)_
+_version 0.4.0+3 (3/1/2014)_
 
 Features
 ---
@@ -17,7 +17,7 @@ Live Examples
 ---
 
 * [Simple Player](http://freepress.jp/dev/dancer.dart/examples/play_stop/play_stop.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/play_stop/))  
-    Simple audio player with Play/Stop button.
+    Simple audio player with Play/Pause button.
 * [FFT](http://freepress.jp/dev/dancer.dart/examples/fft/fft.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/fft/))  
     Realtime 'Fast Fourier Transform' visualizer.
 * [Waveform](http://freepress.jp/dev/dancer.dart/examples/waveform/waveform.html) ([source](http://github.com/hyamamoto/dancer.dart/tree/master/web/waveform/))  
@@ -28,7 +28,7 @@ Live Examples
 API Document
 ---
 
-* [dartdoc/dancer](http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html)
+* http://htmlpreview.github.com/?http://github.com/hyamamoto/dancer.dart/blob/master/docs/dancer.html
 
 Code Example
 ---
@@ -60,8 +60,8 @@ Code Example
     //kick.off();
   });
 
-  // Load up an audio file.
-  dancer.load({ "src": "../songs/tonetest", "codecs": [ "ogg", "mp3"]});
+  // Load up an audio file 'tonetext.ogg'
+  dancer.load({ "src": "../songs/tonetest", "codecs": [ "ogg"]});
 
   ...
   ...
